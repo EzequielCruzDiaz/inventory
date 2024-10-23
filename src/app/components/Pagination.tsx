@@ -1,6 +1,11 @@
 import styles from "../styles/Pagination.module.css";
+import { PaginationProps } from "../types/products";
 
-export default function Pagination({ page, totalPages, onPageChange }) {
+export default function Pagination({
+  page,
+  totalPages,
+  onPageChange,
+}: PaginationProps) {
   return (
     <div className={styles.pagination}>
       <button

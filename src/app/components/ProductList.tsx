@@ -1,11 +1,7 @@
 import Image from "next/image";
 import styles from "../styles/ProductList.module.css";
 import { ProductsUser } from "@/app/types/products";
-
-type ProductListProps = {
-  products: ProductsUser[];
-  onProductClick: (product: ProductsUser) => void;
-};
+import { ProductListProps } from "@/app/types/products";
 
 export default function ProductList({
   products,

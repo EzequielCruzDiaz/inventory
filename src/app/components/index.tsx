@@ -7,12 +7,7 @@ import SearchBar from "../components/SearchBar";
 import CategoryFilter from "../components/CategoryFilter";
 import Pagination from "../components/Pagination";
 import styles from "../styles/ProductList.module.css";
-
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-}
+import { Product } from "../types/products";
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -28,7 +23,7 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const response = await axios.get<Product[]>(
-          "https://6712b4a86c5f5ced66246f27.mockapi.io/api/v1/products"
+          "https://fakestoreapi.com/products"
         );
         setProducts(response.data);
         setFilteredProducts(response.data);

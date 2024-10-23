@@ -3,7 +3,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: "loremflickr.com",
+        hostname: "fakestoreapi.com",
       },
     ],
   },

@@ -1,11 +1,11 @@
 import styles from "../styles/ProductDetail.module.css";
+import { ProductDetailprops } from "../types/products";
 
-export default function ProductDetail({ product, onBack }) {
+export default function ProductDetail({ product, onBack }: ProductDetailprops) {
+  console.log("Created At:", product.createdAt);
+
   return (
     <div className={styles.detailView}>
-      <button onClick={onBack} className={styles.backButton}>
-        Back to Products
-      </button>
       <h2 className={styles.productName}>{product.name}</h2>
       <img
         src={product.image}
@@ -16,10 +16,10 @@ export default function ProductDetail({ product, onBack }) {
       <p className={styles.category}>
         <strong>Category:</strong> {product.category}
       </p>
-      <p className={styles.date}>
-        <strong>Created At:</strong>{" "}
-        {new Date(product.createdAt).toLocaleDateString()}
-      </p>
+
+      <button onClick={onBack} className={styles.backButton}>
+        Back to Products
+      </button>
     </div>
   );
 }

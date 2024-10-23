@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Link from "next/link";
-import path from "path";
-import { text } from "stream/consumers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,7 +22,9 @@ export const metadata: Metadata = {
 
 const NavItems = [
   { path: "/", text: "Home" },
-  { path: "/products", text: "product" },
+  { path: "/products", text: "Products" },
+  { path: "/admin/products", text: "Admin Products" },
+  { path: "/contact", text: "Contact" },
 ];
 
 export default function RootLayout({
@@ -44,13 +44,13 @@ export default function RootLayout({
                 MiTienda
               </Link>
               <nav>
-                {NavItems.map((NavItems) => (
+                {NavItems.map((item) => (
                   <Link
-                    key={NavItems.path}
-                    href={NavItems.path}
+                    key={item.path}
+                    href={item.path}
                     className="text-muted-foreground hover:text-primary mr-2 font-bold text-xl"
                   >
-                    {NavItems.text}
+                    {item.text}
                   </Link>
                 ))}
               </nav>
@@ -74,38 +74,16 @@ export default function RootLayout({
                     Enlaces Rápidos
                   </h3>
                   <ul className="space-y-2">
-                    <li>
-                      <Link
-                        href="/"
-                        className="text-muted-foreground hover:text-primary"
-                      >
-                        Inicio
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/productos"
-                        className="text-muted-foreground hover:text-primary"
-                      >
-                        Productos
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/admin/productos"
-                        className="text-muted-foreground hover:text-primary"
-                      >
-                        Admin Productos
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/contacto"
-                        className="text-muted-foreground hover:text-primary"
-                      >
-                        Contacto
-                      </Link>
-                    </li>
+                    {NavItems.map((item) => (
+                      <li key={item.path}>
+                        <Link
+                          href={item.path}
+                          className="text-muted-foreground hover:text-primary"
+                        >
+                          {item.text}
+                        </Link>
+                      </li>
+                    ))}
                   </ul>
                 </div>
                 <div>

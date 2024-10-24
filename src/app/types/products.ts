@@ -1,6 +1,6 @@
 export type ProductsUser = {
   id: number;
-  name: string;
+  title: string;
   description: string;
   price: number;
   image: string;

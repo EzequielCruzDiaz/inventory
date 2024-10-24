@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState, ChangeEvent } from "react";
 import axios from "axios";
 import ProductList from "../components/ProductList";
@@ -6,7 +7,6 @@ import ProductDetail from "../components/ProductDetail";
 import SearchBar from "../components/SearchBar";
 import CategoryFilter from "../components/CategoryFilter";
 import Pagination from "../components/Pagination";
-import styles from "../styles/ProductList.module.css";
 import { Product } from "../types/products";
 
 export default function Home() {
@@ -18,10 +18,13 @@ export default function Home() {
   const [page, setPage] = useState<number>(1);
   const [limit] = useState<number>(5);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const response = await axios.get<Product[]>(
           "https://fakestoreapi.com/products"
         );
@@ -34,6 +37,9 @@ export default function Home() {
         setCategories(categories);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setError("Failed to fetch products. Please try again later.");
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchData();
@@ -56,7 +62,7 @@ export default function Home() {
     }
     if (search) {
       filtered = filtered.filter((product) =>
-        product.name.toLowerCase().includes(search.toLowerCase())
+        product.title.toLowerCase().includes(search.toLowerCase())
       );
     }
     setFilteredProducts(filtered);
@@ -81,27 +87,44 @@ export default function Home() {
   );
   const totalPages = Math.ceil(filteredProducts.length / limit);
 
+  if (isLoading) {
+    return <div className="text-center py-10">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center py-10 text-red-500">{error}</div>;
+  }
+
   return (
-    <div className={styles.container}>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-2xl font-bold mb-8 text-center">Catalog</h1>
       {selectedProduct ? (
         <ProductDetail product={selectedProduct} onBack={handleBackToList} />
       ) : (
         <>
-          <SearchBar value={searchQuery} onChange={handleSearch} />
-          <CategoryFilter
-            categories={categories}
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-          />
+          <div className="mb-6 flex flex-col sm:flex-row gap-4">
+            <div className="w-full sm:w-2/3">
+              <SearchBar value={searchQuery} onChange={handleSearch} />
+            </div>
+            <div className="w-full sm:w-1/3">
+              <CategoryFilter
+                categories={categories}
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+              />
+            </div>
+          </div>
           <ProductList
             products={paginatedProducts}
             onProductClick={handleProductClick}
           />
-          <Pagination
-            page={page}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
+          <div className="mt-8">
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
         </>
       )}
     </div>

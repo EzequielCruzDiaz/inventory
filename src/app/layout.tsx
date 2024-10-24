@@ -23,8 +23,6 @@ export const metadata: Metadata = {
 const NavItems = [
   { path: "/", text: "Home" },
   { path: "/products", text: "Products" },
-  { path: "/admin/products", text: "Admin Products" },
-  { path: "/contact", text: "Contact" },
 ];
 
 export default function RootLayout({

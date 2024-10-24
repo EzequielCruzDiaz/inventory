@@ -1,38 +1,41 @@
 import Image from "next/image";
-import styles from "../styles/ProductList.module.css";
-import { ProductsUser } from "@/app/types/products";
-import { ProductListProps } from "@/app/types/products";
+import { ProductsUser, ProductListProps } from "@/app/types/products";
 
 export default function ProductList({
   products,
   onProductClick,
 }: ProductListProps) {
   return (
-    <div className={styles.grid}>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {products.length > 0 ? (
         products?.map((product: ProductsUser) => (
           <div
             key={product.id}
-            className={styles.card}
+            className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition duration-300 hover:shadow-lg"
             onClick={() => onProductClick(product)}
           >
-            <Image
-              src={product.image}
-              alt={product.name}
-              width={500}
-              height={500}
-              className={styles.image}
-            />
-            <div className={styles.cardContent}>
-              <h2 className={styles.productName}>{product.name}</h2>
-              <p className={styles.description}>
+            <div className="relative h-48">
+              <Image
+                src={product.image}
+                alt={product.title}
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
+            <div className="p-4">
+              <h2 className="text-xl font-semibold mb-2 text-gray-800">
+                {product.title}
+              </h2>
+              <p className="text-gray-600 font-bold">
                 {product.description.slice(0, 60)}...
               </p>
             </div>
           </div>
         ))
       ) : (
-        <p>No hay productos disponibles</p>
+        <p className="col-span-full text-center text-gray-600">
+          No hay productos disponibles
+        </p>
       )}
     </div>
   );

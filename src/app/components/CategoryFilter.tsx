@@ -1,3 +1,4 @@
+// if you are only using the types in the import statement, you can use import type to reduce the amount of code that is bundled.
 import { categoryFilterProps } from "../types/products";
 export default function CategoryFilter({
   categories,

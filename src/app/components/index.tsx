@@ -8,7 +8,7 @@ import ProductDetail from "../components/ProductDetail";
 import ProductList from "../components/ProductList";
 import SearchBar from "../components/SearchBar";
 import { Product } from "../types/products";
-import { fetchCategories } from "../lib/productService";
+
 
 export default function ProductPage() {
   const [products, setProducts] = useState<Product[]>([]);

@@ -1,5 +1,9 @@
-// if you are only using the types in the import statement, you can use import type to reduce the amount of code that is bundled.
-import { categoryFilterProps } from "../types/products";
+export type categoryFilterProps = {
+  categories: string[];
+  value: string | number;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+};
+
 export default function CategoryFilter({
   categories,
   value,
@@ -10,7 +14,7 @@ export default function CategoryFilter({
       <select
         value={value}
         onChange={onChange}
-        className="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        className="w-full px-4 py-2 text-gray-400 bg-white border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         aria-label="Select category"
       >
         {categories.map((category) => (

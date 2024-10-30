@@ -1,4 +1,9 @@
-import { PaginationProps } from "../types/products";
+export type PaginationProps = {
+  page: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+};
+
 export default function Pagination({
   page,
   totalPages,

@@ -1,4 +1,4 @@
-import ProductPage from "@/app/components/index";
+import ProductPage from "@/app/components/product/ProductPage";
 
 export default function ProductHome() {
   return <ProductPage />;

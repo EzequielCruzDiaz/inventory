@@ -1,4 +1,4 @@
-const siteConfig = {
+export const siteConfig = {
   siteName: "Eshop",
   contactEmail: "Eshop@Gmail.com",
   contactPhone: "(809) 456-7890",
@@ -8,5 +8,3 @@ const siteConfig = {
     keywords: "inventory, administration, Users, Product",
   },
 };
-
-export default siteConfig;

@@ -1,4 +1,4 @@
-import siteConfig from "../Siteconfig";
+import { siteConfig } from "@/app/Siteconfig";
 
 export default function Footer() {
   return (

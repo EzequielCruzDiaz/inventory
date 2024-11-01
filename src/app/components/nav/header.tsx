@@ -1,16 +1,16 @@
-'use client'
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import siteConfig from "../Siteconfig"
-import { ShoppingCart, User } from "lucide-react"
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { siteConfig } from "@/app/Siteconfig";
+import { ShoppingCart, User } from "lucide-react";
 
 const NavItems = [
   { path: "/", text: "Home" },
   { path: "/products", text: "Products" },
-]
+];
 
 export default function Header() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <header className="bg-gray-700 text-primary-foreground py-4">
@@ -55,5 +55,5 @@ export default function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }

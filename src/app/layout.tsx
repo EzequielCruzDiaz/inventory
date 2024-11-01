@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { titlefont } from "./fonts/titlefonts";
-import Header from "./components/header";
-import Footer from "./components/footer";
+import Header from "./components/nav/header";
+import Footer from "./components/nav/footer";
 
 export const metadata: Metadata = {
   title: "Inventory",

@@ -3,13 +3,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/app/Siteconfig";
 import { ShoppingCart, User } from "lucide-react";
+import { CategoryFilter } from "../filters/CategoryFilter";
 
 const NavItems = [
   { path: "/", text: "Home" },
   { path: "/products", text: "Products" },
 ];
 
-export default function Header() {
+export const Header = () => {
   const pathname = usePathname();
 
   return (
@@ -56,4 +57,4 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};

@@ -1,3 +1,5 @@
+import { FaTag } from "react-icons/fa";
+
 type ProductInfoProps = {
   title: string;
   category: string;
@@ -10,12 +12,15 @@ export default function ProductInfo({
   description,
 }: ProductInfoProps) {
   return (
-    <div>
-      <h2 className="text-3xl font-bold text-gray-800 mb-2">{title}</h2>
-      <span className="inline-block px-4 py-1.5 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">
-        {category}
-      </span>
-      <p className="text-gray-600 text-lg leading-relaxed">{description}</p>
+    <div className="p-6 bg-white rounded-lg shadow-sm space-y-4">
+      <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
+      <div className="flex items-center space-x-2">
+        <FaTag className="w-4 h-4 text-gray-500" />
+        <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+          {category}
+        </span>
+      </div>
+      <p className="text-gray-600 text-base leading-relaxed">{description}</p>
     </div>
   );
 }

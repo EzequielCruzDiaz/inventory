@@ -4,11 +4,11 @@ export type PaginationProps = {
   onPageChange: (page: number) => void;
 };
 
-export default function Pagination({
+export const Pagination = ({
   page,
   totalPages,
   onPageChange,
-}: PaginationProps) {
+}: PaginationProps) => {
   return (
     <div className="flex justify-center items-center space-x-4 mt-8">
       <button
@@ -48,4 +48,4 @@ export default function Pagination({
       </button>
     </div>
   );
-}
+};

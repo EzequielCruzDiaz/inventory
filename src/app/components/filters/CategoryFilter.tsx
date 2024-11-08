@@ -1,26 +1,35 @@
+import useProducts from "@/app/hooks/useProducts";
+import { useQueryParam } from "@/app/hooks/useSearchProduct";
+import { useRouter, useSearchParams } from "next/navigation";
 
-interface CategoryFilterProps {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  categories: string[];
-}
+export const CategoryFilter = () => {
+  const { updateQueryParam } = useQueryParam();
+  const searchParams = useSearchParams();
+  const selectedCategory = searchParams.get("category") || "All";
 
-const CategoryFilter: React.FC<CategoryFilterProps> = ({
-  value,
-  onChange,
-  categories,
-}) => (
-  <select
-    value={value}
-    onChange={onChange}
-    className="border border-gray-300 rounded-lg p-2 w-full md:w-1/3"
-  >
-    {categories.map((category) => (
-      <option key={category} value={category}>
-        {category}
-      </option>
-    ))}
-  </select>
-);
+  const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedValue = event.target.value;
+    updateQueryParam("category", selectedValue);
+  };
 
-export default CategoryFilter;
+  const { categories } = useProducts();
+
+  return (
+    <div className="relative w-full max-w-lg">
+      <select
+        value={selectedCategory}
+        onChange={onChange}
+        className=" mt-4 w-full p-3 pl-4 pr-4 text-gray-700 bg-white border 
+                   border-gray-300 rounded-xl shadow-sm transition duration-200 
+                   hover:border-gray-400 focus:outline-none focus:ring-2 
+                   focus:ring-blue-200 focus:border-blue-400"
+      >
+        {categories.map((category) => (
+          <option key={category} value={category} className="text-gray-700">
+            {category}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};

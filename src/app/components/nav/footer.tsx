@@ -1,6 +1,6 @@
 import { siteConfig } from "@/app/Siteconfig";
 
-export default function Footer() {
+export const Footer = () => {
   return (
     <footer className="bg-muted mt-auto">
       <div className="container mx-auto px-4 py-8">
@@ -31,4 +31,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+};

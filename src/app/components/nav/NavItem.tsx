@@ -17,7 +17,7 @@ export const NavItem = ({ path, text }: NavItemProps) => {
         className={`font-bold text-lg transition-colors duration-200 ${
           pathname === path
             ? "text-white border-b-2 border-white"
-            : "text-gray-300 hover:text-white"
+            : "text-gray-350 hover:text-white"
         }`}
       >
         {text}

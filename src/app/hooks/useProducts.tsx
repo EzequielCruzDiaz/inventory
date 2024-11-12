@@ -1,36 +1,12 @@
-import { useState, useEffect } from "react";
-import { fetchProducts, fetchCategories } from "@/app/lib/productService";
-import { Product } from "@/app/types/products";
+import { useCategories } from "./useCategories";
+import { useProductsData } from "./useProductData";
 
 const useProducts = (selectedCategory?: string, searchTerm?: string) => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<string[]>([]);
-
-  useEffect(() => {
-    const loadCategories = async () => {
-      const fetchedCategories = await fetchCategories();
-      setCategories(fetchedCategories);
-    };
-    loadCategories();
-  }, []);
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      const fetchedProducts = await fetchProducts(selectedCategory);
-      setProducts(fetchedProducts);
-    };
-    loadProducts();
-  }, [selectedCategory]);
-
-  const filteredProducts = products.filter((product) => {
-    const matchesCategory =
-      selectedCategory === "All" || product.category === selectedCategory;
-    const matchesSearchTerm = product.title
-      .toLowerCase()
-      .includes(searchTerm?.toLowerCase() || "");
-    return matchesCategory && matchesSearchTerm;
-  });
-
+  const categories = useCategories();
+  const { products, filteredProducts } = useProductsData(
+    selectedCategory,
+    searchTerm
+  );
   return { products, categories, filteredProducts };
 };
 

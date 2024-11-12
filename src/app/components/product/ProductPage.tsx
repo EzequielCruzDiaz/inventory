@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Head from "next/head";
 import { CategoryFilter } from "../filters/CategoryFilter";
 import SearchBar from "../search/SearchBar";
 import { ProductList } from "./ProductList";
@@ -13,11 +12,6 @@ const ProductPage = () => {
 
   return (
     <>
-      <Head>
-        <title>{`Inventory - Eshop`}</title>
-        <meta name="description" content="Manage your products" />
-      </Head>
-
       <div>
         <CategoryFilter />
         <SearchBar />

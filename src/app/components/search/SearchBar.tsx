@@ -3,13 +3,12 @@ import { useState, useEffect } from "react";
 
 export default function SearchBar() {
   const [inputValue, setInputValue] = useState("");
-  const [debouncedValue, setDebouncedValue] = useState("");
   const { updateQueryParam } = useQueryParam();
 
   useEffect(() => {
     const handler = setTimeout(() => {
       updateQueryParam("search", inputValue);
-    }, 200);
+    }, 1500);
     return () => {
       clearTimeout(handler);
     };

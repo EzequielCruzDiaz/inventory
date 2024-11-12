@@ -6,7 +6,6 @@ import Image from "next/image";
 import { fetchProductById } from "@/app/lib/productService";
 import { Loader } from "@/app/components/product/ProductLoader";
 import { Product } from "@/app/types/products";
-import BackButton from "@/app/components/product/details/BackButton";
 import { motion } from "framer-motion";
 
 const ProductDetailPage = () => {
@@ -40,14 +39,24 @@ const ProductDetailPage = () => {
         <p className="text-2xl font-semibold text-red-500 mb-4">
           Product not found.
         </p>
-        <BackButton onBack={() => router.back()} />
+        <button
+          onClick={() => router.push("/")}
+          className="mt-4 px-4 py-2 bg-indigo-500 text-white rounded-md"
+        >
+          Atrás
+        </button>
       </div>
     );
 
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <BackButton onBack={() => router.back()} />
+        <button
+          onClick={() => router.push("/products")}
+          className="mb-4 px-4 py-2 bg-indigo-500 text-white rounded-md"
+        >
+          Atrás
+        </button>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

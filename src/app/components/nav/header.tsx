@@ -1,18 +1,14 @@
-"use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { siteConfig } from "@/app/Siteconfig";
 import { ShoppingCart, User } from "lucide-react";
-import { CategoryFilter } from "../filters/CategoryFilter";
+import { NavItem } from "./NavItem";
 
-const NavItems = [
+const paths = [
   { path: "/", text: "Home" },
   { path: "/products", text: "Products" },
 ];
 
 export const Header = () => {
-  const pathname = usePathname();
-
   return (
     <header className="bg-gray-700 text-primary-foreground py-4">
       <div className="container mx-auto px-5 flex justify-between items-center text-white">
@@ -24,19 +20,8 @@ export const Header = () => {
 
         <nav>
           <ul className="flex space-x-4">
-            {NavItems.map((item) => (
-              <li key={item.path}>
-                <Link
-                  href={item.path}
-                  className={`font-bold text-lg transition-colors duration-200 ${
-                    pathname === item.path
-                      ? "text-white border-b-2 border-white"
-                      : "text-gray-300 hover:text-white"
-                  }`}
-                >
-                  {item.text}
-                </Link>
-              </li>
+            {paths.map((item) => (
+              <NavItem key={item.path} path={item.path} text={item.text} />
             ))}
           </ul>
         </nav>

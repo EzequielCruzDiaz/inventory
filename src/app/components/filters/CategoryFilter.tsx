@@ -1,6 +1,6 @@
 import useProducts from "@/app/hooks/useProducts";
 import { useQueryParam } from "@/app/hooks/useSearchProduct";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export const CategoryFilter = () => {
   const { updateQueryParam } = useQueryParam();

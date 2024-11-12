@@ -7,16 +7,15 @@ export const fetchProducts = async (
   limit: number = 50,
   page: number = 1
 ): Promise<Product[]> => {
-  const categoryQuery = category !== "All" ? `&category=${category}` : "";
-  const response = await storeApi.get(
-    `/products?limit=${limit}&page=${page}${categoryQuery}`
-  );
+  const response = await storeApi.get("/products", {
+    params: { limit, page, ...(category !== "All" && { category }) },
+  });
   return response.data;
 };
 
 export const fetchCategories = async (): Promise<string[]> => {
   try {
-    const response = await axios.get<string[]>(
+    const response = await storeApi.get<string[]>(
       "https://fakestoreapi.com/products/categories"
     );
 

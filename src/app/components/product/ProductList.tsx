@@ -1,4 +1,3 @@
-import React, { useMemo } from "react";
 import type { Product } from "@/app/types/products";
 import ProductItem from "./ProductItem";
 
@@ -7,21 +6,22 @@ type ProductListProps = {
 };
 
 export function ProductList({ products }: ProductListProps) {
-  const renderedProducts = useMemo(() => {
-    return products.map((product) => (
-      <ProductItem key={product.id} product={product} />
-    ));
-  }, [products]);
-
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 rounded-lg">
+    <ul className="flex flex-wrap gap-16 p-4">
       {products && products.length > 0 ? (
-        renderedProducts
+        products.map((product) => (
+          <li
+            key={product.id}
+            className="w-full sm:w-1/1 lg:w-1/6 bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl"
+          >
+            <ProductItem product={product} />
+          </li>
+        ))
       ) : (
-        <p className="col-span-full text-center text-gray-600">
-          No hay productos disponibles
-        </p>
+        <li className="col-span-full text-center text-gray-600 bg-gray-100 p-6 rounded-lg shadow-md">
+          No available Products
+        </li>
       )}
-    </div>
+    </ul>
   );
 }

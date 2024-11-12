@@ -1,14 +1,17 @@
 import type { Product } from "../types/products";
-import axios from "axios";
 import storeApi from "./axiosInstance";
 
 export const fetchProducts = async (
-  category: string = "All",
+  category?: string,
   limit: number = 50,
   page: number = 1
 ): Promise<Product[]> => {
   const response = await storeApi.get("/products", {
-    params: { limit, page, ...(category !== "All" && { category }) },
+    params: {
+      limit,
+      page,
+      ...(category ? { category } : {}),
+    },
   });
   return response.data;
 };

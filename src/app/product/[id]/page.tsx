@@ -43,7 +43,7 @@ const ProductDetailPage = () => {
           onClick={() => router.push("/")}
           className="mt-4 px-4 py-2 bg-indigo-500 text-white rounded-md"
         >
-          Atrás
+          Back
         </button>
       </div>
     );
@@ -55,7 +55,7 @@ const ProductDetailPage = () => {
           onClick={() => router.push("/products")}
           className="mb-4 px-4 py-2 bg-indigo-500 text-white rounded-md"
         >
-          Atrás
+          Back To products
         </button>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

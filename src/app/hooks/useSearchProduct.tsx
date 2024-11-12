@@ -5,9 +5,16 @@ export const useQueryParam = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const updateQueryParam = (key: string, value: string) => {
+  const updateQueryParam = (
+    key: string,
+    value: string | ((currentValue: string | null) => string)
+  ) => {
     const newParams = new URLSearchParams(searchParams.toString());
-    newParams.set(key, value);
+    const currentValue = newParams.get(key);
+
+    const newValue = typeof value === "function" ? value(currentValue) : value;
+    newParams.set(key, newValue);
+
     router.push(`${pathName}?${newParams.toString()}`);
   };
 

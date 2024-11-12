@@ -4,11 +4,13 @@ import { CategoryFilter } from "../filters/CategoryFilter";
 import SearchBar from "../search/SearchBar";
 import { ProductList } from "./ProductList";
 import { Pagination } from "../nav/Pagination";
-import { usePaginationAndFilters } from "@/app/hooks/usePaginationAndFilters";
+import { useFilters } from "@/app/hooks/useFilters";
+import { usePagination } from "@/app/hooks/usePagination ";
 
 const ProductPage = () => {
+  const { filteredProducts } = useFilters();
   const { paginatedProducts, totalPages, page, handlePageChange } =
-    usePaginationAndFilters();
+    usePagination(filteredProducts);
 
   return (
     <>

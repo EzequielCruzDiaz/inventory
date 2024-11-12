@@ -1,4 +1,4 @@
-import Button from "./button";
+import Button from "./Navbutton";
 
 export type PaginationProps = {
   page: number;

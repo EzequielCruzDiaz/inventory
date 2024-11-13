@@ -13,7 +13,12 @@ export const useQueryParam = () => {
     const currentValue = newParams.get(key);
 
     const newValue = typeof value === "function" ? value(currentValue) : value;
-    newParams.set(key, newValue);
+
+    if (newValue) {
+      newParams.set(key, newValue);
+    } else {
+      newParams.delete(key);
+    }
 
     router.push(`${pathName}?${newParams.toString()}`);
   };

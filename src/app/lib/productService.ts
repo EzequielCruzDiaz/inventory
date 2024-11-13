@@ -10,7 +10,7 @@ export const fetchProducts = async (
     params: {
       limit,
       page,
-      ...(category ? { category } : {}),
+      category,
     },
   });
   return response.data;
@@ -22,7 +22,7 @@ export const fetchCategories = async (): Promise<string[]> => {
       "https://fakestoreapi.com/products/categories"
     );
 
-    return ["All", ...response.data];
+    return response.data;
   } catch (error) {
     console.error("Error fetching categories:", error);
     throw new Error("Failed to fetch categories. Please try again later.");

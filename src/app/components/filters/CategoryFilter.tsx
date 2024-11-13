@@ -24,6 +24,7 @@ export const CategoryFilter = () => {
                    hover:border-gray-400 focus:outline-none focus:ring-2 
                    focus:ring-blue-200 focus:border-blue-400"
       >
+        <option value="">All</option>
         {categories.map((category) => (
           <option key={category} value={category} className="text-gray-700">
             {category}

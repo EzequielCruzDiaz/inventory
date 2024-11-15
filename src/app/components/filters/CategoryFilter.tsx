@@ -1,4 +1,4 @@
-import useProducts from "@/app/hooks/useProducts";
+import { useCategories } from "@/app/hooks/useCategories";
 import { useQueryParam } from "@/app/hooks/useSearchProduct";
 import { useSearchParams } from "next/navigation";
 
@@ -6,13 +6,16 @@ export const CategoryFilter = () => {
   const { updateQueryParam } = useQueryParam();
   const searchParams = useSearchParams();
   const selectedCategory = searchParams.get("category") || undefined;
+  const { categories, isLoading, error } = useCategories();
 
   const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
     updateQueryParam("category", selectedValue !== "All" ? selectedValue : "");
   };
 
-  const { categories } = useProducts();
+  if (isLoading) return <div>Loading...</div>;
+
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div className="relative w-full max-w-lg">

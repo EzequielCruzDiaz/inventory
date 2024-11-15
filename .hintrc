@@ -10,7 +10,7 @@
         "label": "off"
       }
     ],
-    "typescript-config/consistent-casing": "off",
-    "no-inline-styles": "off"
+    "typescript-config/consistent-casing": "on",
+    "no-inline-styles": "on"
   }
 }

@@ -1,31 +1,34 @@
-import { useCategories } from "./useCategories";
-import { useState, useEffect } from "react";
-import { fetchProducts } from "@/app/lib/productService";
-import { Product } from "@/app/types/products";
+import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
+import { useMemo } from "react";
+import { fetchProducts } from "../lib/productService";
 
-const useProducts = (selectedCategory?: string, searchTerm?: string) => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const categories = useCategories();
+export const useProducts = () => {
+  const searchParams = useSearchParams();
 
-  useEffect(() => {
-    const loadProducts = async () => {
-      const categoryToFetch = selectedCategory;
-      const fetchedProducts = await fetchProducts(categoryToFetch);
-      setProducts(fetchedProducts);
-    };
-    loadProducts();
-  }, [selectedCategory]);
+  const searchTerm = searchParams.get("search") || "";
+  const selectedCategory = searchParams.get("category") || undefined;
 
-  const filteredProducts = products.filter((product) => {
-    const matchesCategory =
-      !selectedCategory || product.category === selectedCategory;
-    const matchesSearchTerm = product.title
-      .toLowerCase()
-      .includes(searchTerm?.toLowerCase() || "");
-    return matchesCategory && matchesSearchTerm;
+  const {
+    data: products = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["products", selectedCategory],
+    queryFn: () => fetchProducts(selectedCategory),
+    staleTime: 5 * 60 * 1000,
   });
 
-  return { products, categories, filteredProducts };
-};
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) => {
+      const matchesCategory =
+        !selectedCategory || product.category === selectedCategory;
+      const matchesSearchTerm = product.title
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      return matchesCategory && matchesSearchTerm;
+    });
+  }, [products, selectedCategory, searchTerm]);
 
-export default useProducts;
+  return { filteredProducts, isLoading, error, searchTerm, selectedCategory };
+};

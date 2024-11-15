@@ -1,14 +1,13 @@
-"use client";
 import React from "react";
 import { CategoryFilter } from "../filters/CategoryFilter";
 import SearchBar from "../search/SearchBar";
 import { ProductList } from "./ProductList";
 import { Pagination } from "../nav/Pagination";
-import { useFilters } from "@/app/hooks/useFilters";
+import { useProducts } from "@/app/hooks/useProducts";
 import { usePagination } from "@/app/hooks/usePagination ";
 
 const ProductPage = () => {
-  const { filteredProducts } = useFilters();
+  const { filteredProducts } = useProducts();
   const { paginatedProducts, totalPages, page, handlePageChange } =
     usePagination(filteredProducts);
 

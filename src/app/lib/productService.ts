@@ -1,42 +1,41 @@
-import type { Product } from "../types/products";
+import type { ApiCategory, ApiProducts, Product } from "../types/products";
 import storeApi from "./axiosInstance";
 
 export const fetchProducts = async (
-  category?: string,
-  limit: number = 50,
-  page: number = 1
-): Promise<Product[]> => {
-  const response = await storeApi.get("/products", {
-    params: {
-      limit,
-      page,
-      category,
-    },
-  });
-  return response.data;
+  page: 1,
+  limit: 20,
+  category?: string[]
+) => {
+  const response = await storeApi.get<{ documents: ApiProducts[] }>(
+    "/products/documents",
+    {
+      params: {
+        page,
+        limit,
+        category,
+      },
+    }
+  );
+
+  return response.data.documents.map((doc) => ({
+    ...doc,
+    id: doc.$id,
+  }));
 };
 
 export const fetchCategories = async (): Promise<string[]> => {
-  try {
-    const response = await storeApi.get<string[]>(
-      "https://fakestoreapi.com/products/categories"
-    );
+  const response = await storeApi.get<{ documents: ApiCategory[] }>(
+    "/categories/documents"
+  );
 
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching categories:", error);
-    throw new Error("Failed to fetch categories. Please try again later.");
-  }
+  return response.data.documents.map((doc) => doc.name);
 };
 
 export const fetchProductById = async (id: string): Promise<Product> => {
-  try {
-    const response = await storeApi.get<Product>(`/products/${id}`);
-    console.log(response.data);
+  const response = await storeApi.get(`/products/documents/${id}`);
 
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching product by ID:", error);
-    throw new Error("Failed to fetch product. Please try again later.");
-  }
+  return {
+    ...response.data,
+    id: response.data.$id,
+  };
 };
